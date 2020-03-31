@@ -20,7 +20,8 @@ class PlayerMutation(graphene.Mutation):
     def mutate(self, info, id, position=None, health=None, mana=None, stamina=None):
         player = Player.objects.get(pk=id)
         if position is not None:
-            player.position = position
+            room = Room.objects.get(pk=position)
+            player.position = room
         if health is not None:
             player.health = health
         if mana is not None:
