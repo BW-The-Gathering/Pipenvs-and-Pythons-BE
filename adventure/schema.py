@@ -86,11 +86,6 @@ class Query(graphene.ObjectType):
         
         return None
 
-
-    
-
-
-
 class Mutation(graphene.ObjectType):
     player_mutation = PlayerMutation.Field()
 
