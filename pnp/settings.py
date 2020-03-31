@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'adventure',
+    'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pnp.wsgi.application'
 
+GRAPHENE = {
+    'SCHEMA': 'adventure.schema.schema'  # dir.file.varname
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
