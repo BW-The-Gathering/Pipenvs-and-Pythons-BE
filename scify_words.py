@@ -40,7 +40,7 @@ scifi_adj = [
     'Resonating',
 ]
 
-scifi_nouns = [
+scifi_rooms = [
     'Airlock',
     'Galley',
     'Mess Hall',
