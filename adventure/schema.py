@@ -86,6 +86,7 @@ class Query(graphene.ObjectType):
 
         return Player.objects.filter(user_id=user)
 
+
     def resolve_all_maps(self, info, **kwargs):
         user = info.context.user
         if user.is_anonymous:
@@ -149,6 +150,26 @@ class Query(graphene.ObjectType):
             return room
         
         return None
+
+    adjacent_rooms = graphene.List(RoomType, id=graphene.Int())
+
+    def resolve_adjacent_rooms(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        current_room = Room.objects.get(pk=id)
+        
+        directions = []
+
+        if current_room.north is not None:
+            directions.append(current_room.north)
+        if current_room.south is not None:
+            directions.append(current_room.south)
+        if current_room.east is not None:
+            directions.append(current_room.east)
+        if current_room.west is not None:
+            directions.append(current_room.west)
+
+        return Room.objects.filter(pk__in=directions)
 
 class Mutation(graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
