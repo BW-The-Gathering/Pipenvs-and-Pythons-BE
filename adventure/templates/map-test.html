@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Map test</title>
+    </head>        
+</html>
+{% extends "base.html" %}
+{% block content %}
+    {% for room in testrun.values %}
+         "{{ room.name }}"  ,  
+         <!-- {{ room }} -->
+    {% endfor %}
+{% endblock content %}
