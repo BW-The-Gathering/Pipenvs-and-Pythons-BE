@@ -22,5 +22,8 @@ from graphene_django.views import GraphQLView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
-    path('test/', views.test, name='map-test')
+    path('test/', views.test, name='map-test'),
+    path('', views.home, name='homepage'),
+    # path('walking/', views.walksim, name='walking')
+    path('pct/', views.pct, name='playercreationtest')
 ]

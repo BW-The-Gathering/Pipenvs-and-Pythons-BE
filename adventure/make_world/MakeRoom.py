@@ -4,12 +4,17 @@ from adventure.make_world.makenames import makename
 from adventure.models import Room,Map,Player
 from django.contrib.auth.models import User # TODO: GET RID OF THIS!!!
 
-def make_player():
+def make_player_old():
     usr = User() # TODO: GET RID OF THIS!!!
     usr.save() # TODO: GET RID OF THIS!!!
     temp = Player(user_id=usr) # TODO: make this legit and not janky
     temp.save() 
     return temp
+
+def make_player(user_id):
+    player = Player(user_id=user_id)
+    player.save()
+    return player
 
 def make_map(player_id, genre='fantasy'): # TODO: How to get player id? 
     # make a map
