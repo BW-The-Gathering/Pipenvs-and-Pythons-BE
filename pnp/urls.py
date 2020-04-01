@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from adventure import views
-
+# from django.views.decorators.csrf import csrf_exempt # This is for dev purposes - testing with insomnia
 from graphene_django.views import GraphQLView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('graphql/', GraphQLView.as_view(graphiql=True)),
-    path('test/', views.test, name='map-test'),
+    # path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))), #  This is for dev purposes - testing with insomnia
+    path('graphql/', GraphQLView.as_view(graphiql=True)), # This is for production
+    path('test/', views.test, name='map-test')
     path('', views.home, name='homepage'),
     # path('walking/', views.walksim, name='walking')
     path('pct/', views.pct, name='playercreationtest')

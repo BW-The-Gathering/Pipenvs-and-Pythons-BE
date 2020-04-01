@@ -11,6 +11,7 @@ python-decouple = "*"
 gunicorn = "*"
 django-heroku = "*"
 graphene-django = "*"
+django-graphql-jwt = "*"
 
 [requires]
 python_version = "3.8"
