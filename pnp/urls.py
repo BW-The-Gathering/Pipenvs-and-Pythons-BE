@@ -23,5 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))), #  This is for dev purposes - testing with insomnia
     path('graphql/', GraphQLView.as_view(graphiql=True)), # This is for production
-    path('test/', views.test, name='map-test')
+    path('test/', views.test, name='map-test'),
+    path('', views.home, name='homepage'),
+    # path('walking/', views.walksim, name='walking'),
+    path('pct/', views.pct, name='playercreationtest')
 ]
