@@ -1,4 +1,5 @@
 import graphene
+import graphql_jwt
 from graphene_django.types import DjangoObjectType
 from django.contrib.auth import get_user_model
 from .models import Player, Map, Room
@@ -40,7 +41,15 @@ class PlayerMutation(graphene.Mutation):
     player = graphene.Field(PlayerType)
 
     def mutate(self, info, id, position=None, health=None, mana=None, stamina=None):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
         player = Player.objects.get(pk=id)
+
+        if user.id is not player.user_id.id:
+            return Exception('This is not your player!')
+
         if position is not None:
             room = Room.objects.get(pk=position)
             player.position = room
@@ -71,12 +80,24 @@ class Query(graphene.ObjectType):
 
 
     def resolve_all_players(self, info, **kwargs):
-        return Player.objects.all()
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
+        return Player.objects.filter(user_id=user)
 
     def resolve_all_maps(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
         return Map.objects.all()
         
     def resolve_all_rooms(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
         return Room.objects.all()
 
     # Get Single
@@ -85,30 +106,54 @@ class Query(graphene.ObjectType):
     room = graphene.Field(RoomType, id=graphene.Int())
 
     def resolve_player(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
         id = kwargs.get('id')
 
         if id is not None:
-            return Player.objects.get(pk=id)
+            player =  Player.objects.get(pk=id)
+            if user.id is not player.user_id.id:
+                return Exception('This is not your player!')
+
+            return player
         
         return None
 
     def resolve_map(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
         id = kwargs.get('id')
 
         if id is not None:
-            return Map.objects.get(pk=id)
-        
+            map = Map.objects.get(pk=id)
+            if user.id is not map.player_id.user_id.id:
+                return Exception('This is not your map!')
+            return map
+
         return None
 
     def resolve_room(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
         id = kwargs.get('id')
 
         if id is not None:
-            return Room.objects.get(pk=id)
+            room = Room.objects.get(pk=id)
+            if user.id is not room.map_id.player_id.user_id.id:
+                return Exception('This is not your room!')
+            
+            return room
         
         return None
 
 class Mutation(graphene.ObjectType):
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
     player_mutation = PlayerMutation.Field()
     create_user = CreateUser.Field()
 
