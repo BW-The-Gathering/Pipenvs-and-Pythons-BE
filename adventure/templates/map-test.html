@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Map test</title>
+    </head>        
+</html>
+{% extends "base.html" %}
+{% block content %}
+    {% for room in testrun.values %}
+         "{{ room.id }}: {{ room.name }}, | {{  room.north }}, | {{ room.east }}, | {{ room.west }}, | {{ room.south }}, -{{room.test }}-"<br><br>
+         
+    {% endfor %}
+{% endblock content %}
