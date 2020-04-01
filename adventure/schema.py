@@ -154,10 +154,17 @@ class Query(graphene.ObjectType):
     adjacent_rooms = graphene.List(RoomType, id=graphene.Int())
 
     def resolve_adjacent_rooms(self, info, **kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+    
         id = kwargs.get('id')
 
         current_room = Room.objects.get(pk=id)
         
+        if user.id is not current_room.map_id.player_id.user_id.id:
+            return Exception('This is not your room!')
+
         directions = []
 
         if current_room.north is not None:
