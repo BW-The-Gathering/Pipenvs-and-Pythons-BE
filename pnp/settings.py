@@ -74,7 +74,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pnp.wsgi.application'
 
 GRAPHENE = {
-    'SCHEMA': 'adventure.schema.schema'  # dir.file.varname
+    'SCHEMA': 'adventure.schema.schema',  # dir.file.varname
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
 
 # Database
@@ -128,3 +131,9 @@ STATIC_URL = '/static/'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
