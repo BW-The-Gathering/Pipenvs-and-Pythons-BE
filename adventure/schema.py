@@ -3,6 +3,8 @@ import graphql_jwt
 from graphene_django.types import DjangoObjectType
 from django.contrib.auth import get_user_model
 from .models import Player, Map, Room
+from adventure.make_char.charcter_create import  game_start
+
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -71,6 +73,24 @@ class MapType(DjangoObjectType):
 class RoomType(DjangoObjectType):
     class Meta:
         model = Room
+
+class StartGame(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int()
+        
+    player = graphene.Field(PlayerType)
+
+    def mutate(self, info,):
+        user = info.context.user
+
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
+        new_player = game_start(user)
+
+        return StartGame(player=new_player)
+
+
 
 class Query(graphene.ObjectType):
     # Get ALL
@@ -184,5 +204,6 @@ class Mutation(graphene.ObjectType):
     refresh_token = graphql_jwt.Refresh.Field()
     player_mutation = PlayerMutation.Field()
     create_user = CreateUser.Field()
+    start_game = StartGame().Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
