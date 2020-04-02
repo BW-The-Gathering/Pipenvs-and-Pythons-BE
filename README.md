@@ -27,9 +27,9 @@
 | GET (Query)     | [allPlayers](#allPlayers)     |
 | GET (Query)     | [allRooms](#allRooms)       |
 | GET (Query)     | [allMaps](#allMaps)        |
-| GET (Query)     | [player](#player)         |
-| GET (Query)     | [room](#room)           |
-| GET (Query)     | [map](#map)            |
+| GET (Query)     | [player](#get-player)         |
+| GET (Query)     | [room](#get-room)           |
+| GET (Query)     | [map](#get-map)            |
 | GET (Query)     | [adjacentRooms](#adjacentRooms)  |
 | POST (Mutation) | [playerMutation](#playerMutation) |
 
@@ -126,7 +126,7 @@ query {
 }
 ```
 
-#### player
+#### get player
 
 ```graphql
 query {
@@ -136,7 +136,7 @@ query {
 }
 ```
 
-#### room
+#### get room
 
 ```graphql
 query {
@@ -146,7 +146,7 @@ query {
 }
 ```
 
-#### map
+#### get map
 
 ```graphql
 query {
@@ -156,11 +156,11 @@ query {
 }
 ```
 
-#### adjacentRoom
+#### adjacentRooms
 
 ```graphql
 query {
-    adjacentRoom(id:"id") {
+    adjacentRooms(id:"id") {
         room
     }
 }
