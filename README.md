@@ -9,29 +9,29 @@
 
 | Model Name |
 |------------|
-| Player     |
-| Room       |
-| Map        |
+| [Player](#Player)     |
+| [Room](#Room)       |
+| [Map](#Map)        |
 
 #### NON-PROTECTED REQUESTS
 
 | Request Type    | Request Name |
 |-----------------|--------------|
-| POST (Mutation) | createUser   |
-| POST (Mutation) | tokenAuth    |
+| POST (Mutation) | [createUser](#createUser)   |
+| POST (Mutation) | [tokenAuth](#tokenAuth)    |
 
 #### PROTECTED REQUESTS
 
 | Request Type    | Request Name   |
 |-----------------|----------------|
-| GET (Query)     | allPlayers     |
-| GET (Query)     | allRooms       |
-| GET (Query)     | allMaps        |
-| GET (Query)     | player         |
-| GET (Query)     | room           |
-| GET (Query)     | map            |
-| GET (Query)     | adjacentRooms  |
-| POST (Mutation) | playerMutation |
+| GET (Query)     | [allPlayers](#allPlayers)     |
+| GET (Query)     | [allRooms](#allRooms)       |
+| GET (Query)     | [allMaps](#allMaps)        |
+| GET (Query)     | [player](#player)         |
+| GET (Query)     | [room](#room)           |
+| GET (Query)     | [map](#map)            |
+| GET (Query)     | [adjacentRooms](#adjacentRooms)  |
+| POST (Mutation) | [playerMutation](#playerMutation) |
 
 ---
 
@@ -51,7 +51,7 @@ stamina = integer
 #### Room
 
 ```
-id = integery primary key
+id = integer primary key
 map_id = integer foreign key (Map)
 name = string [max length 200]
 description = string
