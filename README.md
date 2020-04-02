@@ -133,7 +133,7 @@ query {
 
 ```graphql
 query {
-    player(id:"id") {
+    player(id:<id>) {
         player
     }
 }
@@ -143,7 +143,7 @@ query {
 
 ```graphql
 query {
-    room(id:"id") {
+    room(id:<id>) {
         room
     }
 }
@@ -153,7 +153,7 @@ query {
 
 ```graphql
 query {
-    map(id:"id") {
+    map(id:<id>) {
         map
     }
 }
@@ -163,7 +163,7 @@ query {
 
 ```graphql
 query {
-    adjacentRooms(id:"id") {
+    adjacentRooms(id:<id>) {
         room
     }
 }
@@ -173,7 +173,7 @@ query {
 
 ```graphql
 mutation {
-    playerMutation(id:"id", [optional player fields]) {
+    playerMutation(id:<id>, [optional player fields]) {
         player
     }
 }
