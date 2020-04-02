@@ -27,3 +27,4 @@ class Room(models.Model):
     south = models.IntegerField(blank=True,null=True)
     east = models.IntegerField(blank=True,null=True)
     west = models.IntegerField(blank=True,null=True)
+    end = models.BooleanField(default=False)
