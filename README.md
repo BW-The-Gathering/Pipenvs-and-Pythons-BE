@@ -1,5 +1,7 @@
 # Pipenvs-and-Pythons-BE
 
+A text-based adventure built with GraphQL and Django that generates a new random map for each game!
+
 ## **API Documentation**
 **BACKEND URL** https://pipenvs-n-pythons.herokuapp.com/graphql/
 - Direct all queries and mutations to this GraphQL endpoint
