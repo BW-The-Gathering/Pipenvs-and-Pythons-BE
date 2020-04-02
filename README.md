@@ -62,6 +62,7 @@ north = integer domestic key (Room)
 south = integer domestic key (Room)
 east = integer domestic key (Room)
 west = integer domestic key (Room)
+end = boolean
 ```
 
 #### Map
