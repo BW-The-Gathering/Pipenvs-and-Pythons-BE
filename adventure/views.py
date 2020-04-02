@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from adventure.make_world.MakeRoom import make_player, make_player_old, make_map, makename
+from adventure.make_world.MakeRoom import make_player, make_player_old, make_map, make_rooms
 from adventure.schema import PlayerMutation
 import graphene
 
@@ -7,8 +7,8 @@ import graphene
 # Create your views here.
 def test(request):
     player = make_player_old()
-    rooms = make_map(player)
-    # rooms = makename()
+    new_map = make_map(player)
+    rooms = make_rooms(new_map, genre='fantasy')
     context = {
         'testrun': rooms
     }
@@ -27,8 +27,8 @@ def pct(request):
     if request.user.is_authenticated:
         username = request.user.username
         player = make_player(user_id=request.user)
-        rooms = make_map(player)
-
+        new_map = make_map(player)
+        rooms = make_rooms(new_map, genre="fantasy")
     context = {
 
         'name': username,

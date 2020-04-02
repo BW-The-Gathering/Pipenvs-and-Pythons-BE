@@ -16,10 +16,13 @@ def make_player(user_id):
     player.save()
     return player
 
-def make_map(player_id, genre='fantasy'): # TODO: How to get player id? 
+def make_map(player_id): # TODO: How to get player id? 
     # make a map
     new_map = Map(player_id=player_id)
     new_map.save()
+    return new_map
+
+def make_rooms(new_map, genre):
     # make first room (0,0)
     entrance = Room(map_id=new_map, name='Entrance') ###TODO: change Room to have coordinates (maybe, also sorta done?)
     entrance.save()
@@ -28,49 +31,7 @@ def make_map(player_id, genre='fantasy'): # TODO: How to get player id?
     # create branches (recursion)
     entrance.north = make_room('south', new_map, coords=(0,1), rooms=rooms, recursion=0, prev_room=entrance, genre=genre)
     entrance.save()
-    # entrance.north = make_room(new_map, (0,0), (0,1), rooms, 0,)
-    # for key in rooms.keys():
-    #     rooms[key].save()
     return rooms
-    
-
-# def attach_room(previous, current, prev_coords, current_coords):
-#     #prev -> current is north
-#     if prev_coords[1] == current_coords[1] - 1:
-#         setattr(previous, 'north', current.id)
-#         setattr(current, 'south', previous.id)
-#     #prev -> current is south
-#     if prev_coords[1] == current_coords[1] + 1:
-#         setattr(previous, 'south', current.id)
-#         setattr(current, 'north', previous.id)
-#     #prev -> current is east
-#     if prev_coords[0] == current_coords[0] - 1:
-#         setattr(previous, 'east', current.id)
-#         setattr(current, 'west', previous.id)
-#     #prev -> current is west
-#     if prev_coords[0] == current_coords[0] + 1:
-#         setattr(previous, 'west', current.id)
-#         setattr(current, 'east', previous.id)
-#     current.save()
-#     previous.save()
-
-
-# def make_room(map_id, prev_coords, current_coords, rooms, recurse_depth, genre='fantasy'):
-#     """
-#         basecase 1: colission
-#         basecase 2: recursion
-
-#         shoot north -> max depth
-#         returncurrent room.id
-#     """
-#     current_room = Room(map_id=map_id, name=makename(genre),)
-#     rooms.update({current_coords: current_room})
-#     attach_room(rooms[prev_coords], rooms[current_room], prev_coords, current_coords)
-#     if recurse_depth == 5:
-#         return current_room
-#     recurse_depth += 1
-#     current_room.north = make_room()
-
 
 
 def make_room(path_to_prev, map_id, coords, rooms, recursion, prev_room, genre='fantasy'):
@@ -122,6 +83,8 @@ def make_room(path_to_prev, map_id, coords, rooms, recursion, prev_room, genre='
     
     
 
+"""Debug Code"""
+
 # maps = make_map(1)
 # # for key in maps.keys():
 # #     print(maps[key].name)
@@ -137,3 +100,4 @@ def make_room(path_to_prev, map_id, coords, rooms, recursion, prev_room, genre='
 # ### TODO: link new room to old room. 
 # ### TODO: mess with shape/recursion RNG
 # # python MakeRoom.py
+
