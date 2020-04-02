@@ -75,9 +75,7 @@ class RoomType(DjangoObjectType):
         model = Room
 
 class StartGame(graphene.Mutation):
-    class Arguments:
-        id = graphene.Int()
-        
+
     player = graphene.Field(PlayerType)
 
     def mutate(self, info,):
