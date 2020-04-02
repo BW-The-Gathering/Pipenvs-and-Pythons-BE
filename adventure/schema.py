@@ -82,6 +82,10 @@ class StartGame(graphene.Mutation):
 
     def mutate(self, info,):
         user = info.context.user
+
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
         new_player = game_start(user)
 
         return StartGame(player=new_player)
