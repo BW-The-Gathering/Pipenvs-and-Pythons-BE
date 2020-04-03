@@ -10,10 +10,13 @@ class Map():
 
 
 class Room:
-    def __init__(self, map_id, name, description=None):
+    def __init__(self, map_id, id, name,xcoord=None, ycoord=None, description=None):
         self.description = description
         self.map_id = map_id
         self.name = name
+        self.id = id
+        self.xcoord = xcoord
+        self.ycoord = ycoord
         self.north = None
         self.east = None
         self.west = None

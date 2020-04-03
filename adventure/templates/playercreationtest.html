@@ -10,7 +10,7 @@
     <p> Your pid is {{ playername }}</p>
     <p>Your rooms: <br> </p>
     {% for room in testrun.values %}
-         "{{ room.id }}: {{ room.name }}, | {{  room.north }}, | {{ room.east }}, | {{ room.west }}, | {{ room.south }}, -{{room.test }}-"<br><br>
+         "{{ room.id }}: {{ room.name }}, | {{  room.north }}, | {{ room.east }}, | {{ room.west }}, | {{ room.south }}, -({{room.xcoord }},{{ room.ycoord }})-"<br><br>
          
     {% endfor %}
         
