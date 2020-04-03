@@ -30,7 +30,7 @@ def make_rooms(new_map, genre):
     rooms = {(0,0): entrance}
     new_map.save()
     # create branches (recursion)
-    entrance.north = make_room('south', new_map, coords=(0,1), rooms=rooms, recursion=0, prev_room=entrance, genre=genre)
+    entrance.north = make_room('south', new_map, coords=(0,1), rooms=rooms, recursion=1, prev_room=entrance, genre=genre)
     entrance.save()
     return rooms
 
