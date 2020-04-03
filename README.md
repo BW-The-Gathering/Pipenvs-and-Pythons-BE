@@ -34,7 +34,7 @@ A text-based adventure built with GraphQL and Django that generates a new random
 | GET (Query)     | [map](#get-map)            |
 | GET (Query)     | [adjacentRooms](#adjacentRooms)  |
 | POST (Mutation) | [playerMutation](#playerMutation) |
-| POST (Mutation) | [startGame](#startGame) |
+| GET (Query) | [playerStart](#playerStart) |
 
 ---
 
@@ -179,11 +179,11 @@ mutation {
     }
 }
 ```
-#### startGame
+#### playerStart
 
 ```graphql
-mutation {
-    startGame {
+query {
+    playerStart {
         player
     }
 }
