@@ -23,16 +23,18 @@ def pct(request):
     move player by updating player.location (graphQL)
     
    """
-    username = 'Charmander'
-    if request.user.is_authenticated:
-        username = request.user.username
-        player = make_player(user_id=request.user)
-        new_map = make_map(player)
-        rooms = make_rooms(new_map, genre="fantasy")
+
+    username = request.user.username
+    player = make_player(user_id=request.user)
+    new_map = make_map(player)
+    rooms = make_rooms(new_map, genre="fantasy")
     context = {
 
         'name': username,
         'playername': player.id,
         'testrun': rooms
-    }
+        }
     return render(request, 'playercreationtest.html', context)
+
+def draw_map(request):
+    pass
