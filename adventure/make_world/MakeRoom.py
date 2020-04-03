@@ -44,7 +44,7 @@ def make_room(path_to_prev, map_id, coords, rooms, recursion, prev_room, genre='
         rooms[coords].save()
         return rooms[coords].id
     # make current room
-    curr_room = Room(map_id=map_id, name=makename(genre),) # description=None) # TODO: Did makename BREAK?
+    curr_room = Room(map_id=map_id, name=makename(genre),xcoord=coords[0], ycoord=coords[1]) # description=None) # TODO: Did makename BREAK?
     curr_room.save()
     # attach_room(path_to_prev, prev_room, curr_room)
     rooms.update({coords: curr_room})
