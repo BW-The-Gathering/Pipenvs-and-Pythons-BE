@@ -74,21 +74,21 @@ class RoomType(DjangoObjectType):
     class Meta:
         model = Room
 
-class StartGame(graphene.Mutation):
-    class Arguments:
-        id = graphene.Int()
+# class StartGame(graphene.Mutation):
+#     class Arguments:
+#         id = graphene.Int()
         
-    player = graphene.Field(PlayerType)
+#     player = graphene.Field(PlayerType)
 
-    def mutate(self, info,):
-        user = info.context.user
+#     def mutate(self, info,):
+#         user = info.context.user
 
-        if user.is_anonymous:
-            return Exception('Not Logged In!')
+#         if user.is_anonymous:
+#             return Exception('Not Logged In!')
 
-        new_player = game_start(user)
+#         new_player = game_start(user)
 
-        return StartGame(player=new_player)
+#         return StartGame(player=new_player)
 
 
 
@@ -125,6 +125,17 @@ class Query(graphene.ObjectType):
     player = graphene.Field(PlayerType, id=graphene.Int())
     map = graphene.Field(MapType, id=graphene.Int())
     room = graphene.Field(RoomType, id=graphene.Int())
+    player_start = graphene.Field(PlayerType)
+
+    def resolve_player_start(self, info, **kwargs):
+        user = info.context.user
+
+        if user.is_anonymous:
+            return Exception('Not Logged In!')
+
+        player_start = game_start(user)
+
+        return player_start
 
     def resolve_player(self, info, **kwargs):
         user = info.context.user
@@ -204,6 +215,6 @@ class Mutation(graphene.ObjectType):
     refresh_token = graphql_jwt.Refresh.Field()
     player_mutation = PlayerMutation.Field()
     create_user = CreateUser.Field()
-    start_game = StartGame().Field()
+    # start_game = StartGame().Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
